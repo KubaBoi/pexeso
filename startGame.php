@@ -1,4 +1,5 @@
 <?php
+#script zaklada novou hru a vrati stav a ID hry
 #hra bude 8x8 zapsana v poli int o velikosti 64 
 #takze bude 32 dvojic znacene od 0 do 31
 $playerId = $_REQUEST["playerId"];

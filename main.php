@@ -1,4 +1,5 @@
 <?php
+#script po zvavolani pozmeni stav hry a vrati aktualni stav
 $move1 = $_REQUEST["move1"];
 $move2 = $_REQUEST["move2"];
 $gameId = $_REQUEST["gameId"];
@@ -12,7 +13,8 @@ if (count($data) >= 4) {
     $player1 = $data[0];
     $player2 = $data[1];
     $whosPlaying = $data[2];
-    $pixels = $data[3].explode(",");
+    $pixels = explode(",", $data[3]);
+    $changedPixels = explode(",", $data[4]);
     
     #vytvoreni pole s pexesovyma pexesákama
     for ($i = 0; $i < 64; $i++) {

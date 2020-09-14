@@ -1,4 +1,5 @@
 <?php
+#script po zavolani prida hrace do hry a vrati stav
 $playerId = $_REQUEST["playerId"];
 $gameId = $_REQUEST["gameId"];
 
