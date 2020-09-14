@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Zpíčisaso</title>
+        <link rel="stylesheet" href="styleSheet.css">
+    </head>
+    <body>
+
+        <h1>ZPÍČISASO</h1>
+        <h2>Tak ty nejsi přihlášenej jo???? Ty zmrde tak to udělej nebo si kurva založ účet... hajzle.</h2>
+
+        <input id="login" placeholder="Jméno..."><br>
+        <input id="password" type="password" placeholder="Heslo..."><br><br>
+        <button onclick="login()">Přihlásí tě to nebo ti to udělá učet... kriple</button>
+        <p>a už jdi dopíči...</p>
+
+        <script>
+            //nejdriv zkontroluje jestli jsou zadany login a password
+            function login() {
+                if (document.getElementById("login").value != "" && document.getElementById("password").value != "") {
+                    var xmlhttp = new XMLHttpRequest();
+                    xmlhttp.onreadystatechange = function() {
+                        if (this.readyState == 4 && this.status == 200) {
+                            var response = JSON.parse(this.responseText.split("-->")[2]);
+                            console.log(response.comment); 
+
+                            //OK
+                            if (response.code == "1") {
+                                document.cookie = "playerId=" + document.getElementById("login").value;
+                                location.replace("startGame.html");
+                            }
+                            else { //not OK
+                                alert("Jméno sedí, ale heslo je špatně blbče.");
+                            }
+                        }
+                    };
+                    xmlhttp.open("GET", "login.php?login=" + document.getElementById("login").value +
+                     "&password=" + document.getElementById("password").value, true);
+                    xmlhttp.send();
+                }
+                else {
+                    alert("NO TAK SEŠ DEBIL??? NEUMÍŠ ZADAT JMÉNO A HESLO KURVA?? " +
+                    "TO JE PROSTĚ ČURÁK ... TO SEM JEŠTĚ NEŽRAL TYVOLE. JDI SE VYSRAT PROSÍMTĚ A ZKUS TO ZNOVA.")
+                }
+            }
+        </script>
+    </body>
+</html>

@@ -16,12 +16,32 @@
         <button onclick="connect()">Připojit do založený hry ty kokote</button>
 
         <script>
+            loadCookies();
+            function loadCookies() {
+                var name = "playerId=";
+                var decodedCookie = decodeURIComponent(document.cookie);
+                var ca = decodedCookie.split(';');
+                for(var i = 0; i <ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        console.log(c.substring(name.length, c.length));
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                //hrac neni prihlasen
+                location.replace("login.html");
+                return "";
+            }
+
             function startGame() {
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
-                        var text = this.responseText;   
-                        console.log(text); 
+                        var response = JSON.parse(this.responseText.split("-->")[2]);
+                        console.log(response.comment); 
                     }
                 };
                 xmlhttp.open("GET", "startGame.php?playerId=" + "1", true);
@@ -32,8 +52,8 @@
                 var xmlhttp = new XMLHttpRequest();
                 xmlhttp.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
-                        var text = this.responseText;    
-                        console.log(text);
+                        var response = JSON.parse(this.responseText.split("-->")[2]);
+                        console.log(response.comment);
                     }
                 };
                 xmlhttp.open("GET", "connectToGame.php?playerId=" + "1" + "&gameId=" + document.getElementById("gameId").value, true);

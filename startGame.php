@@ -51,6 +51,7 @@ fwrite($dataFile, $player1 . "|" . $player2 . "|" . $whosPlaying . "|" . $st . "
 fclose($dataFile);
 $jsonObj->code = 1;
 $jsonObj->gameId = $gameId;
+$jsonObj->comment = "Vsechno ok";
 echo json_encode($jsonObj);
 
 ?>
