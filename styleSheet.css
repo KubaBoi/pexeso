@@ -1,0 +1,88 @@
+body {
+    text-align: center;
+    color: whitesmoke;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    animation-name: bgAnimation;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+  }
+  
+  p {
+    font-family: verdana;
+    font-size: 20px;
+  }
+
+/*barevna zmena pozadi*/
+@keyframes bgAnimation {
+    0% {background-color: #383838;}
+    50% {background-color: #606060;}
+    100% {background-color: #383838;}
+
+}
+
+button {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background-color: whitesmoke;
+    border: none;
+    color: #383838;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    /*border-radius: 5px; zakulaceni*/
+
+    animation-name: buttonHoverOff;
+    animation-fill-mode: forwards;
+    animation-duration: 1s;
+}
+button:hover{
+    background-color: whitesmoke;
+    border: none;
+    color: #383838;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+
+    animation-name: buttonHover;
+    animation-fill-mode: forwards;
+    animation-duration: 1s;
+}
+button:focus{
+  background-color: whitesmoke;
+  border: none;
+  color: #383838;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+
+  animation-name: buttonRadiusOn;
+  animation-duration: 1s;
+}
+
+input {
+  padding: 12px 20px;
+  margin: 8px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+@keyframes buttonHover {
+    from {color: black; background-color: whitesmoke;}
+    to {color: whitesmoke; background-color:#383838;}
+}
+@keyframes buttonHoverOff {
+    from {color: whitesmoke; background-color: black;}
+    to {color: #383838; background-color: whitesmoke;}
+}
+@keyframes buttonRadiusOn {
+  from {border-radius: 0px;}
+  to {border-radius: 5px;}
+}

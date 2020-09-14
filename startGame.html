@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Zpíčisaso</title>
+        <link rel="stylesheet" href="styleSheet.css">
+    </head>
+    <body>
+
+        <h1>ZPÍČISASO</h1>
+        <h2>Jakože pexeso z píči.</h2>
+
+        <p>Chceš začít novou hru ty kokote?</p>
+        <button onclick="startGame()">Začít novou hru ty kokote</button>
+        <p>Nebo se chceš připojit do založený hry ty kokote?<br> Musíš ale vědět ID tý hry, jo? Napiš ho někam tam a potom jeď.</p>
+        <input id="gameId" placeholder="ID hry..."><br><br>
+        <button onclick="connect()">Připojit do založený hry ty kokote</button>
+
+        <script>
+            function startGame() {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var text = this.responseText;   
+                        console.log(text); 
+                    }
+                };
+                xmlhttp.open("GET", "startGame.php?playerId=" + "1", true);
+                xmlhttp.send();
+            }
+
+            function connect() {
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var text = this.responseText;    
+                        console.log(text);
+                    }
+                };
+                xmlhttp.open("GET", "connectToGame.php?playerId=" + "1" + "&gameId=" + document.getElementById("gameId").value, true);
+                xmlhttp.send();
+            }
+        </script>
+    </body>
+</html>
