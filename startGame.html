@@ -12,16 +12,16 @@
 
         <p>Chceš začít novou hru ty kokote?</p>
         <button onclick="startGame()">Začít novou hru ty kokote</button>
-        <p>Nebo se chceš připojit do založený hry ty kokote?<br> Musíš ale vědět ID tý hry, jo? Napiš ho někam tam a potom jeď.</p>
+        <p>Nebo se chceš připojit do založený hry ty kokote?<br> Musíš ale vědět ID tý hry, jo? Napiš ho tam a potom jeď.</p>
         <input id="gameId" placeholder="ID hry..."><br><br>
         <button onclick="connect()">Připojit do založený hry ty kokote</button>
         <br><br>
         <button onclick="logout()">Odhlásit se... šourku</button>
 
         <script>
-            loadCookies();
-            function loadCookies() {
-                var name = "playerId=";
+            loadCookies("playerId");
+            function loadCookies(cname) {
+                var name = cname + "=";
                 var decodedCookie = decodeURIComponent(document.cookie);
                 var ca = decodedCookie.split(';');
                 for(var i = 0; i <ca.length; i++) {
@@ -45,6 +45,14 @@
                     if (this.readyState == 4 && this.status == 200) {
                         var response = JSON.parse(this.responseText.split("-->")[2]);
                         console.log(response.comment); 
+
+                        if (response.code == "1") {//hra zalozena
+                            document.cookie = "gameId=" + response.gameId;
+                            location.replace("game.html");
+                        }
+                        else {
+                            alert(response.comment);
+                        }
                     }
                 };
                 xmlhttp.open("GET", "startGame.php?playerId=" + "1", true);
@@ -57,6 +65,14 @@
                     if (this.readyState == 4 && this.status == 200) {
                         var response = JSON.parse(this.responseText.split("-->")[2]);
                         console.log(response.comment);
+
+                        if (response.code == "1") {//hra zalozena
+                            document.cookie = "gameId=" + response.gameId;
+                            location.replace("game.html");
+                        }
+                        else {
+                            alert(response.comment);
+                        }
                     }
                 };
                 xmlhttp.open("GET", "connectToGame.php?playerId=" + "1" + "&gameId=" + document.getElementById("gameId").value, true);
