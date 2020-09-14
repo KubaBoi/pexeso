@@ -20,7 +20,7 @@ $result = $conn->query($sql);
 
 if ($result->num_rows == 0) { //ucet neexistuje
     //zalozi se novy
-    $sql = "INSERT INTO users (login, password) VALUES ($login, $password)";
+    $sql = "INSERT INTO users (login, password) VALUES ('$login', '$password')";
 
     if ($conn->query($sql) === TRUE) {
         $jsonObj->code = 1;

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="cs-cz">
     <head>
+        <meta charset="UTF-8">
         <title>Zpíčisaso</title>
         <link rel="stylesheet" href="styleSheet.css">
     </head>
@@ -14,6 +15,8 @@
         <p>Nebo se chceš připojit do založený hry ty kokote?<br> Musíš ale vědět ID tý hry, jo? Napiš ho někam tam a potom jeď.</p>
         <input id="gameId" placeholder="ID hry..."><br><br>
         <button onclick="connect()">Připojit do založený hry ty kokote</button>
+        <br><br>
+        <button onclick="logout()">Odhásit se... šourku</button>
 
         <script>
             loadCookies();
@@ -58,6 +61,18 @@
                 };
                 xmlhttp.open("GET", "connectToGame.php?playerId=" + "1" + "&gameId=" + document.getElementById("gameId").value, true);
                 xmlhttp.send();
+            }
+
+            function logout() {
+                var cookies = document.cookie.split(";");
+
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i];
+                    var eqPos = cookie.indexOf("=");
+                    var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+                    document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+                }
+                location.replace("login.html");
             }
         </script>
     </body>
