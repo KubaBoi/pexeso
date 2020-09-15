@@ -6,18 +6,17 @@
         <link rel="stylesheet" href="styleSheet.css">
     </head>
     <body>
+        <p id="playerId" style="text-align: left;"></p>
+        <p id="gameId" style="text-align: left;"></p>
 
-        <h1>ZPÍČISASO</h1>
-        <h2>Tak ty nejsi přihlášenej jo???? Ty zmrde tak to udělej nebo si kurva založ účet... hajzle.</h2>
-
-        <input id="login" placeholder="Jméno..."><br>
-        <input id="password" type="password" placeholder="Heslo..."><br><br>
-        <button onclick="login()">Přihlásí tě to nebo ti to udělá učet... kriple</button>
-        <p>a už jdi dopíči...</p>
+        <table id="gameTable">
+        </table>
 
         <script>
             var playerId = loadCookies("playerId");
             var gameId = loadCookies("gameId");
+
+            window.setInterval(run, 100);
 
             function loadCookies(cname) {
                 var name = cname + "=";
@@ -39,7 +38,42 @@
             }
 
             function run() {
-                
+                var xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var response = JSON.parse(this.responseText.split("-->")[2]);
+                        console.log(response.comment); 
+
+                        if (response.code == "1") {//hra zalozena
+                            console.log(response.pixels);
+                            console.log(response.change);
+                            draw();
+                        }
+                        /*else {
+                            alert(response.comment);
+                        }*/
+                    }
+                };
+                xmlhttp.open("GET", "main.php?playerId=" + playerId + "&gameId=" + gameId + 
+                "&move1=-1&move2=-1", true);
+                xmlhttp.send();
+            }
+
+            function draw() {
+                document.getElementById("playerId").innerHTML = "hráč: " + playerId;
+                document.getElementById("gameId").innerHTML = "hra: " + gameId;
+
+                var table = ""
+
+                for (y = 0; y < 8; y++) {
+                    table += "<tr>";
+                    for (x = 0; x < 8; x++) {
+                        table += "<td><img src='pics/0.png' style='width:100px;height:100px'></td>";
+                    }
+                    table += "</tr>";
+                }
+
+                document.getElementById("gameTable").innerHTML = table;
             }
         </script>
     </body>

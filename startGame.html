@@ -19,7 +19,7 @@
         <button onclick="logout()">Odhlásit se... šourku</button>
 
         <script>
-            loadCookies("playerId");
+            var playerId = loadCookies("playerId");
             function loadCookies(cname) {
                 var name = cname + "=";
                 var decodedCookie = decodeURIComponent(document.cookie);
@@ -55,7 +55,7 @@
                         }
                     }
                 };
-                xmlhttp.open("GET", "startGame.php?playerId=" + "1", true);
+                xmlhttp.open("GET", "startGame.php?playerId=" + playerId, true);
                 xmlhttp.send();
             }
 
@@ -75,7 +75,7 @@
                         }
                     }
                 };
-                xmlhttp.open("GET", "connectToGame.php?playerId=" + "1" + "&gameId=" + document.getElementById("gameId").value, true);
+                xmlhttp.open("GET", "connectToGame.php?playerId=" + playerId + "&gameId=" + document.getElementById("gameId").value, true);
                 xmlhttp.send();
             }
 

@@ -35,7 +35,7 @@ if (file_exists("game" . $gameId)) {
 }
 else {
     $jsonObj->code = 0;
-    $jsonObj->comment = "Hra neexistuje: " . $e;
+    $jsonObj->comment = "Hra $gameId neexistuje" . $e;
 }
 
 echo json_encode($jsonObj);

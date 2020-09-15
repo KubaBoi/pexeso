@@ -40,7 +40,7 @@ $st = "";
 $stDone = "";
 for ($i = 0; $i < 64; $i++) {
     $st .= strval($data[$i]);
-    $stDone .= "0";
+    $stDone .= "-1";
     if ($i < 63) {
         $st .= ",";
         $stDone .= ",";
